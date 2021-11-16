@@ -8,10 +8,6 @@ class UpdateStatusService {
     this.status = status;
     this.id = id;
   }
-
-  async updateStatus() {
-    await user.update({where: {id: this.id}, data: {online: this.status}})
-  }
 }
 
 export default UpdateStatusService;
