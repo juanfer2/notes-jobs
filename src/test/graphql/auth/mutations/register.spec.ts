@@ -27,7 +27,6 @@ describe("AUTH", () => {
     username: '',
     name: '',
     password: '',
-    online: false,
     createdAt: new Date,
     updatedAt: new Date
   }
