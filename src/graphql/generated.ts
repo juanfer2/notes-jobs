@@ -28,8 +28,14 @@ export type MessageResponse = {
 export type Mutation = {
   __typename?: 'Mutation';
   _empty?: Maybe<Scalars['String']>;
+  createProject?: Maybe<Project>;
   healt?: Maybe<MessageResponse>;
   register?: Maybe<User>;
+};
+
+
+export type MutationCreateProjectArgs = {
+  ProjectInput?: Maybe<ProjectInput>;
 };
 
 
@@ -37,11 +43,24 @@ export type MutationRegisterArgs = {
   userInput?: Maybe<UserInput>;
 };
 
+export type Project = {
+  __typename?: 'Project';
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  title?: Maybe<Scalars['String']>;
+};
+
+export type ProjectInput = {
+  description: Scalars['String'];
+  title: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   _empty?: Maybe<Scalars['String']>;
   healt?: Maybe<MessageResponse>;
   login?: Maybe<User>;
+  projects?: Maybe<Array<Maybe<Project>>>;
 };
 
 
@@ -139,6 +158,8 @@ export type ResolversTypes = {
   LoginInput: LoginInput;
   MessageResponse: ResolverTypeWrapper<MessageResponse>;
   Mutation: ResolverTypeWrapper<{}>;
+  Project: ResolverTypeWrapper<Project>;
+  ProjectInput: ProjectInput;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
@@ -154,6 +175,8 @@ export type ResolversParentTypes = {
   LoginInput: LoginInput;
   MessageResponse: MessageResponse;
   Mutation: {};
+  Project: Project;
+  ProjectInput: ProjectInput;
   Query: {};
   String: Scalars['String'];
   User: User;
@@ -175,14 +198,23 @@ export type MessageResponseResolvers<ContextType = any, ParentType extends Resol
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   _empty?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  createProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationCreateProjectArgs, never>>;
   healt?: Resolver<Maybe<ResolversTypes['MessageResponse']>, ParentType, ContextType>;
   register?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationRegisterArgs, never>>;
+};
+
+export type ProjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['Project'] = ResolversParentTypes['Project']> = {
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   _empty?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   healt?: Resolver<Maybe<ResolversTypes['MessageResponse']>, ParentType, ContextType>;
   login?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryLoginArgs, never>>;
+  projects?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
@@ -198,6 +230,7 @@ export type Resolvers<ContextType = any> = {
   JSONObject?: GraphQLScalarType;
   MessageResponse?: MessageResponseResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  Project?: ProjectResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };

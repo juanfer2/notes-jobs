@@ -41,6 +41,16 @@ class AuthService {
     return null;
   }
 
+  async getUserByToken(token: string): Promise<any> {
+    try {
+      const tokenUser: any = await jwt.verify(token, this.PRIVATE_KEY);
+      const user: any = await this.userRepository.findBy({id: tokenUser.id});
+      return user;
+    } catch (error) {
+      return null
+    }
+  }
+
   async login(inputData: any): Promise<any> {
     try {
       const user: any = await this.userRepository.findBy({
