@@ -13,8 +13,7 @@ model User {
   username         String            @unique
   name             String?
   password         String?
-  Queries Query[]
-  Projects Project[]
+  Projects  Project[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
@@ -27,6 +26,7 @@ model Project {
   description             String?
   userId Int
   user   User @relation(fields: [userId], references: [id])
+  queries Query[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
@@ -38,7 +38,20 @@ model Query {
   title             String?
   description             String?
   projectId Int
-  project   User @relation(fields: [projectId], references: [id])
+  project   Project @relation(fields: [projectId], references: [id])
+  scripts Script[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Script {
+  @@map("scripts")
+  id      Int  @id @default(autoincrement())
+  type    String?
+  content String?
+  queryId Int
+  query   Query @relation(fields: [queryId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
