@@ -29,6 +29,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   _empty?: Maybe<Scalars['String']>;
   createProject?: Maybe<Project>;
+  createQueryScript?: Maybe<QueryScript>;
   healt?: Maybe<MessageResponse>;
   register?: Maybe<User>;
 };
@@ -36,6 +37,11 @@ export type Mutation = {
 
 export type MutationCreateProjectArgs = {
   ProjectInput?: Maybe<ProjectInput>;
+};
+
+
+export type MutationCreateQueryScriptArgs = {
+  QueryScript?: Maybe<QueryScriptInput>;
 };
 
 
@@ -47,6 +53,7 @@ export type Project = {
   __typename?: 'Project';
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  queryScripts?: Maybe<Array<Maybe<QueryScript>>>;
   title?: Maybe<Scalars['String']>;
 };
 
@@ -60,7 +67,10 @@ export type Query = {
   _empty?: Maybe<Scalars['String']>;
   healt?: Maybe<MessageResponse>;
   login?: Maybe<User>;
+  me?: Maybe<User>;
+  projectById?: Maybe<Project>;
   projects?: Maybe<Array<Maybe<Project>>>;
+  queryScripts?: Maybe<Array<Maybe<QueryScript>>>;
 };
 
 
@@ -68,12 +78,48 @@ export type QueryLoginArgs = {
   loginInput?: Maybe<LoginInput>;
 };
 
+
+export type QueryProjectByIdArgs = {
+  ID: Scalars['Int'];
+};
+
+export type QueryScript = {
+  __typename?: 'QueryScript';
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  scripts?: Maybe<Array<Maybe<Script>>>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type QueryScriptInput = {
+  description?: Maybe<Scalars['String']>;
+  projectId: Scalars['ID'];
+  scripts?: Maybe<Array<Maybe<ScriptInput>>>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type Script = {
+  __typename?: 'Script';
+  content?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  query?: Maybe<QueryScript>;
+  queryId?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type ScriptInput = {
+  content: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type User = {
   __typename?: 'User';
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
   token?: Maybe<Scalars['String']>;
-  username: Scalars['String'];
+  username?: Maybe<Scalars['String']>;
 };
 
 export type UserInput = {
@@ -153,6 +199,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   JSON: ResolverTypeWrapper<Scalars['JSON']>;
   JSONObject: ResolverTypeWrapper<Scalars['JSONObject']>;
   LoginInput: LoginInput;
@@ -161,6 +208,10 @@ export type ResolversTypes = {
   Project: ResolverTypeWrapper<Project>;
   ProjectInput: ProjectInput;
   Query: ResolverTypeWrapper<{}>;
+  QueryScript: ResolverTypeWrapper<QueryScript>;
+  QueryScriptInput: QueryScriptInput;
+  Script: ResolverTypeWrapper<Script>;
+  ScriptInput: ScriptInput;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
   UserInput: UserInput;
@@ -170,6 +221,7 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   ID: Scalars['ID'];
+  Int: Scalars['Int'];
   JSON: Scalars['JSON'];
   JSONObject: Scalars['JSONObject'];
   LoginInput: LoginInput;
@@ -178,6 +230,10 @@ export type ResolversParentTypes = {
   Project: Project;
   ProjectInput: ProjectInput;
   Query: {};
+  QueryScript: QueryScript;
+  QueryScriptInput: QueryScriptInput;
+  Script: Script;
+  ScriptInput: ScriptInput;
   String: Scalars['String'];
   User: User;
   UserInput: UserInput;
@@ -199,6 +255,7 @@ export type MessageResponseResolvers<ContextType = any, ParentType extends Resol
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   _empty?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   createProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationCreateProjectArgs, never>>;
+  createQueryScript?: Resolver<Maybe<ResolversTypes['QueryScript']>, ParentType, ContextType, RequireFields<MutationCreateQueryScriptArgs, never>>;
   healt?: Resolver<Maybe<ResolversTypes['MessageResponse']>, ParentType, ContextType>;
   register?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationRegisterArgs, never>>;
 };
@@ -206,6 +263,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 export type ProjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['Project'] = ResolversParentTypes['Project']> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  queryScripts?: Resolver<Maybe<Array<Maybe<ResolversTypes['QueryScript']>>>, ParentType, ContextType>;
   title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -214,14 +272,35 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   _empty?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   healt?: Resolver<Maybe<ResolversTypes['MessageResponse']>, ParentType, ContextType>;
   login?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryLoginArgs, never>>;
+  me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  projectById?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<QueryProjectByIdArgs, 'ID'>>;
   projects?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType>;
+  queryScripts?: Resolver<Maybe<Array<Maybe<ResolversTypes['QueryScript']>>>, ParentType, ContextType>;
+};
+
+export type QueryScriptResolvers<ContextType = any, ParentType extends ResolversParentTypes['QueryScript'] = ResolversParentTypes['QueryScript']> = {
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  scripts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Script']>>>, ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ScriptResolvers<ContextType = any, ParentType extends ResolversParentTypes['Script'] = ResolversParentTypes['Script']> = {
+  content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  query?: Resolver<Maybe<ResolversTypes['QueryScript']>, ParentType, ContextType>;
+  queryId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -232,6 +311,8 @@ export type Resolvers<ContextType = any> = {
   Mutation?: MutationResolvers<ContextType>;
   Project?: ProjectResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  QueryScript?: QueryScriptResolvers<ContextType>;
+  Script?: ScriptResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };
 

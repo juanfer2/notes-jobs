@@ -2,6 +2,7 @@ type Project {
   id: ID!
   title: String
   description: String
+  queryScripts: [QueryScript]
 }
 
 input ProjectInput {
@@ -11,6 +12,7 @@ input ProjectInput {
 
 type Query {
   projects: [Project]
+  projectById(ID: Int!): Project
 }
 
 type Mutation {

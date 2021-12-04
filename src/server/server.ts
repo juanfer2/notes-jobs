@@ -33,7 +33,6 @@ class Server {
     const serverApollo = new ApolloServer({
       schema,
       context,
-      
     })
     
     // CORS configuration

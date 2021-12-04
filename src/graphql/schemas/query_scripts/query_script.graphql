@@ -1,0 +1,36 @@
+type QueryScript {
+  id: ID!
+  title: String
+  description: String
+  scripts: [Script]
+}
+
+type Script {
+  id: ID!
+  title: String
+  type: String
+  content: String
+  queryId: Int
+  query: QueryScript
+}
+
+input ScriptInput {
+  title: String
+  type: String
+  content: String!
+}
+
+input QueryScriptInput {
+  title: String
+  description: String
+  projectId: ID!
+  scripts: [ScriptInput]
+}
+
+type Query {
+  queryScripts: [QueryScript]
+}
+
+type Mutation {
+  createQueryScript(QueryScript: QueryScriptInput): QueryScript
+}

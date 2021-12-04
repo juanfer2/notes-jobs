@@ -10,6 +10,29 @@ class GetProjects {
       where: {
         userId: user.id
       },
+      include: {
+        queryScripts: {
+          include: {
+            scripts: true
+          }
+        },
+      },
+    });
+  }
+
+  async byUserProjectId(user: any, id: number) {
+    return await project.findFirst({
+      where: {
+        id,
+        userId: user.id
+      },
+      include: {
+        queryScripts: {
+          include: {
+            scripts: true
+          }
+        },
+      },
     });
   }
 }

@@ -10,7 +10,14 @@ export const ProjectResolver: IResolvers = {
       const getProjects = new GetProjects
       const projects: any = await getProjects.byUser(context.currentUser)
       return projects ? projects : []
-    })
+    }),
+    projectById: authenticated(async (_: void, arg: any, context: any): Promise<Project[]> => {
+      const projectId: number = arg.ID;
+      const getProjects = new GetProjects
+      const projects: any = await getProjects.byUserProjectId(context.currentUser,
+        projectId)
+      return projects ? projects : []
+    }),
   },
   Mutation: {
     createProject: authenticated(async (_: void, arg: any, context: any): Promise<Project> => {
@@ -18,7 +25,6 @@ export const ProjectResolver: IResolvers = {
       const newProject = new ProjectModel({...userInput,
         user: context.currentUser});
       const data: any = await newProject.create();
-      console.log("data", data);
 
       return data
     })

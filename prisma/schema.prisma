@@ -26,13 +26,13 @@ model Project {
   description             String?
   userId Int
   user   User @relation(fields: [userId], references: [id])
-  queries Query[]
+  queryScripts QueryScript[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
 
-model Query {
+model QueryScript {
   @@map("queries")
   id     Int  @id @default(autoincrement())
   title             String?
@@ -48,10 +48,11 @@ model Query {
 model Script {
   @@map("scripts")
   id      Int  @id @default(autoincrement())
+  title   String?
   type    String?
   content String?
   queryId Int
-  query   Query @relation(fields: [queryId], references: [id])
+  queryScript   QueryScript @relation(fields: [queryId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt

@@ -4,7 +4,6 @@ const HEADER_NAME = 'authorization';
 
 export const context = async ({ req }: any) => {
   const authToken = req.headers[HEADER_NAME];
-
   try {
     const authService = new AuthService
     const user = await authService.getUserByToken(authToken)

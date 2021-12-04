@@ -4,5 +4,5 @@ const prisma = new PrismaClient({
   errorFormat: 'pretty',
 });
 
-export const { user, project } = prisma;
+export const { user, project, queryScript, script } = prisma;
 export default prisma;

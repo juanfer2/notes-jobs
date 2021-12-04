@@ -32,8 +32,7 @@ export default class Server {
         app.use(compression());
         const serverApollo = new ApolloServer({
           schema,
-          context,
-          
+          context
         })
 
         // without this, apollo will throw an error.
