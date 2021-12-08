@@ -98,8 +98,8 @@ jobs:
           command: yarn global add @railway/cli
       
       - run: 
-        name: Install railway
-        command: yarn global bin
+          name: Install railway
+          command: yarn global bin
 
       - run:
           name: Start deploy to railway
