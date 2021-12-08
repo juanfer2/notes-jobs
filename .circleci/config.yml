@@ -95,7 +95,7 @@ jobs:
 
       - run:
           name: Install railway
-          command: sudo npm i -g @railway/cli
+          command: yarn global add @railway/cli
 
       - run:
           name: Start deploy to railway
