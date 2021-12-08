@@ -1,5 +1,5 @@
 {
-  "name": "whastapp-api",
+  "name": "notes-job-api",
   "version": "1.0.0",
   "main": "src/index.js",
   "author": "juanfer",
@@ -11,6 +11,7 @@
     "start": "node dist/index.js",
     "postinstall": "yarn build",
     "dev": "nodemon src/index.ts",
+    "migrate": "npx prisma migrate dev",
     "migration-pull-print": "npx prisma db pull --print",
     "prisma-generate": "npx prisma generate",
     "test": "jest",
