@@ -93,13 +93,13 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run:
-          name: Install railway
-          command: sudo npm i -g @railway/cli
+      #- run:
+      #    name: Install railway
+      #    command: sudo npm i -g @railway/cli
 
       - run:
           name: Start deploy to railway
-          command: RAILWAY_TOKEN=e83a9ae3-bb54-49bd-9391-76094154188f railway up
+          command: RAILWAY_TOKEN=e83a9ae3-bb54-49bd-9391-76094154188f npx railway up
 
 
 
