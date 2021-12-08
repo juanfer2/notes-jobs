@@ -99,7 +99,7 @@ jobs:
 
       - run:
           name: Start deploy to railway
-          command: RAILWAY_TOKEN=e83a9ae3-bb54-49bd-9391-76094154188f npx railway up
+          command: RAILWAY_TOKEN=e83a9ae3-bb54-49bd-9391-76094154188f railway up
 
 
 
