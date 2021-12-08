@@ -61,3 +61,19 @@ jobs:
     machine: true
     steps:
       - run: echo 'You must approve to deploy this branch'
+  
+  deploy:
+    - run: echo 'Deploy'
+
+workflows:
+  version: 1
+  test-and-deploy:
+    jobs:
+      - build
+      - hold:
+          type: approval
+          requires:
+            - build
+      - deploy:
+          requires:
+            - hold
