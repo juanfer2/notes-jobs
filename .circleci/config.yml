@@ -69,7 +69,7 @@ jobs:
           name: Run Tests
 
 workflows:
-  version: 4
+  version: 5
   test-and-deploy:
     jobs:
       - test
