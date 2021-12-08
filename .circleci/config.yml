@@ -77,8 +77,8 @@ jobs:
       - checkout
 
       - run:
-        name: Run Tests Deploy
-        command: echo 'Deploy'
+          name: Run Tests Deploy
+          command: echo 'Deploy'
 
 workflows:
   version: 2
