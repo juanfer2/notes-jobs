@@ -1,8 +1,8 @@
-version: 2.1
+version: 3.1
 # orbs:
 #   browser-tools: circleci/browser-tools@1.2.3
 jobs:
-  build:
+  test:
     docker:
       - image: node:14.17.2
       - image: circleci/redis
@@ -69,11 +69,11 @@ workflows:
   version: 1
   test-and-deploy:
     jobs:
-      - build
+      - test
       - hold:
           type: approval
           requires:
-            - build
+            - test
       - deploy:
           requires:
             - hold
