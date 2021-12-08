@@ -67,7 +67,7 @@ jobs:
       - run: echo 'Deploy'
 
 workflows:
-  version: 1
+  version: 2
   test-and-deploy:
     jobs:
       - test
