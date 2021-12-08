@@ -63,7 +63,8 @@ jobs:
       - run: echo 'You must approve to deploy this branch'
   
   deploy:
-    - run: echo 'Deploy'
+    steps:
+      - run: echo 'Deploy'
 
 workflows:
   version: 1
