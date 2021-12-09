@@ -101,6 +101,10 @@ jobs:
           name: Install railway
           command: yarn global bin
 
+      - run: 
+          name: Install railway
+          command: export PATH="$PATH:`yarn global bin`"
+
       - run:
           name: Start deploy to railway
           command: RAILWAY_TOKEN=e83a9ae3-bb54-49bd-9391-76094154188f railway up
