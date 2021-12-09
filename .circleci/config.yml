@@ -95,7 +95,7 @@ jobs:
 
       - run:
           name: Install railway
-          command: npm install --prefix=$HOME/.local --global @railway/cli
+          command: sudo npm install --global @railway/cli
 
       #- run: 
       #    name: Install railway
