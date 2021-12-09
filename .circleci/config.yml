@@ -95,19 +95,19 @@ jobs:
 
       - run:
           name: Install railway
-          command: yarn global add @railway/cli
-      
-      - run: 
-          name: Install railway
-          command: yarn global bin
+          command: npm install --prefix=$HOME/.local --global @railway/cli
 
-      - run: 
-          name: Install railway
-          command: export PATH="$PATH:`yarn global bin`"3
+      #- run: 
+      #    name: Install railway
+      #    command: yarn global bin
 
-      - run: 
-          name: Install railway
-          command: bash -l
+      #- run: 
+      #    name: Install railway
+      #    command: export PATH="$PATH:`yarn global bin`"3
+
+      #- run: 
+      #    name: Install railway
+      #    command: bash -l
 
       - run:
           name: Start deploy to railway
