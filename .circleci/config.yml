@@ -66,7 +66,7 @@ jobs:
   deploy:
     docker:
       - image: node:14.17.2
-        user: sudo
+        # user: node
 
     steps:
       - checkout
@@ -78,7 +78,7 @@ jobs:
             VER="18.06.3-ce"
             curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            sudo mv /tmp/docker/* /usr/bin
+            mv /tmp/docker/* /usr/bin
 
       - run:
           name: Check install
@@ -97,8 +97,11 @@ jobs:
 
       - run:
           name: Install railway
-          command: sudo npm install -g @railway/cli
+          command: chmod +x /usr/bin
 
+      - run:
+          name: Install railway
+          command: npm install -g @railway/cli
         
       - run:
           name: Run railway deploy
