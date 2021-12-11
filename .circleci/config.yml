@@ -66,6 +66,7 @@ jobs:
   deploy:
     docker:
       - image: node:14.17.2
+        user: node
 
     steps:
       - checkout
