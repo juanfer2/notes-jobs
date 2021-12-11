@@ -96,7 +96,11 @@ jobs:
 
       - run:
           name: Install railway
-          command: npm install --global @railway/cli
+          command: yarn global add @railway/cli
+
+      - run:
+          name: Install railway
+          command: export PATH="$(yarn global bin):$PATH"
         
       - run:
           name: Run railway deploy
