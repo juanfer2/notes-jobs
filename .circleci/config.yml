@@ -100,11 +100,16 @@ jobs:
 
       - run:
           name: Install railway
+          command: yarn config set prefix ~/.yarn
+
+      - run:
+          name: Install railway
           command: export PATH="$(yarn global bin):$PATH"
 
       - run:
           name: Install railway
-          command: source ~/.bash_profile
+          command: export PATH="$PATH:`yarn global bin`"
+
         
       - run:
           name: Run railway deploy
