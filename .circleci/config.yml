@@ -78,7 +78,7 @@ jobs:
             VER="18.06.3-ce"
             curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
+            sudo mv /tmp/docker/* /usr/bin
 
       - run:
           name: Check install
@@ -97,19 +97,7 @@ jobs:
 
       - run:
           name: Install railway
-          command: yarn global add @railway/cli
-
-      - run:
-          name: Install railway
-          command: yarn config set prefix ~/.yarn
-
-      - run:
-          name: Install railway
-          command: export PATH="$(yarn global bin):$PATH"
-
-      - run:
-          name: Install railway
-          command: export PATH="$PATH:`yarn global bin`"
+          command: sudo npm install -g @railway/cli
 
         
       - run:
