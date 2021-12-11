@@ -32,6 +32,7 @@ export type Mutation = {
   createQueryScript?: Maybe<QueryScript>;
   healt?: Maybe<MessageResponse>;
   register?: Maybe<User>;
+  updateQueryScript?: Maybe<QueryScript>;
 };
 
 
@@ -47,6 +48,12 @@ export type MutationCreateQueryScriptArgs = {
 
 export type MutationRegisterArgs = {
   userInput?: Maybe<UserInput>;
+};
+
+
+export type MutationUpdateQueryScriptArgs = {
+  ID: Scalars['Int'];
+  QueryScriptUpdateInput?: Maybe<QueryScriptUpdateInput>;
 };
 
 export type Project = {
@@ -98,6 +105,13 @@ export type QueryScriptInput = {
   title?: Maybe<Scalars['String']>;
 };
 
+export type QueryScriptUpdateInput = {
+  description?: Maybe<Scalars['String']>;
+  projectId: Scalars['ID'];
+  scripts?: Maybe<Array<Maybe<ScriptUpdateInput>>>;
+  title?: Maybe<Scalars['String']>;
+};
+
 export type Script = {
   __typename?: 'Script';
   content?: Maybe<Scalars['String']>;
@@ -110,6 +124,13 @@ export type Script = {
 
 export type ScriptInput = {
   content: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type ScriptUpdateInput = {
+  content: Scalars['String'];
+  id?: Maybe<Scalars['ID']>;
   title?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
 };
@@ -210,8 +231,10 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   QueryScript: ResolverTypeWrapper<QueryScript>;
   QueryScriptInput: QueryScriptInput;
+  QueryScriptUpdateInput: QueryScriptUpdateInput;
   Script: ResolverTypeWrapper<Script>;
   ScriptInput: ScriptInput;
+  ScriptUpdateInput: ScriptUpdateInput;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
   UserInput: UserInput;
@@ -232,8 +255,10 @@ export type ResolversParentTypes = {
   Query: {};
   QueryScript: QueryScript;
   QueryScriptInput: QueryScriptInput;
+  QueryScriptUpdateInput: QueryScriptUpdateInput;
   Script: Script;
   ScriptInput: ScriptInput;
+  ScriptUpdateInput: ScriptUpdateInput;
   String: Scalars['String'];
   User: User;
   UserInput: UserInput;
@@ -258,6 +283,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createQueryScript?: Resolver<Maybe<ResolversTypes['QueryScript']>, ParentType, ContextType, RequireFields<MutationCreateQueryScriptArgs, never>>;
   healt?: Resolver<Maybe<ResolversTypes['MessageResponse']>, ParentType, ContextType>;
   register?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationRegisterArgs, never>>;
+  updateQueryScript?: Resolver<Maybe<ResolversTypes['QueryScript']>, ParentType, ContextType, RequireFields<MutationUpdateQueryScriptArgs, 'ID'>>;
 };
 
 export type ProjectResolvers<ContextType = any, ParentType extends ResolversParentTypes['Project'] = ResolversParentTypes['Project']> = {

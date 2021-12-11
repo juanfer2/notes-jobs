@@ -11,6 +11,7 @@ export const ProjectResolver: IResolvers = {
       const projects: any = await getProjects.byUser(context.currentUser)
       return projects ? projects : []
     }),
+
     projectById: authenticated(async (_: void, arg: any, context: any): Promise<Project[]> => {
       const projectId: number = arg.ID;
       const getProjects = new GetProjects
