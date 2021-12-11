@@ -101,6 +101,10 @@ jobs:
       - run:
           name: Install railway
           command: export PATH="$(yarn global bin):$PATH"
+
+      - run:
+          name: Install railway
+          command: source ~/.bash_profile
         
       - run:
           name: Run railway deploy
