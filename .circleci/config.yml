@@ -96,8 +96,7 @@ jobs:
 
       - run:
           name: Install railway
-          command: | 
-            sudo npm install --global @railway/cli
+          command: sudo npm install --global @railway/cli
         
       - run:
           name: Run railway deploy
