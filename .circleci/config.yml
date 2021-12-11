@@ -104,7 +104,6 @@ jobs:
           name: Run railway deploy
           command: RAILWAY_TOKEN=e83a9ae3-bb54-49bd-9391-76094154188f railway up
 
-
       #- run: 
       #    name: Install railway
       #    command: yarn global bin
