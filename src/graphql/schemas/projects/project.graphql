@@ -17,4 +17,5 @@ type Query {
 
 type Mutation {
   createProject(ProjectInput: ProjectInput): Project
+  updateProject(ID: ID!, ProjectInput: ProjectInput): Project
 }

@@ -3,6 +3,7 @@ import { authenticated } from '../../middlewares/auth-guard'
 import { Project, ProjectInput } from '../generated'
 import ProjectModel from '../../modules/projects/models/project'
 import GetProjects from '../../modules/projects/services/get_projects'
+import { updateProject } from '../../modules/projects/services/project_service'
 
 export const ProjectResolver: IResolvers = {
   Query: {
@@ -11,7 +12,6 @@ export const ProjectResolver: IResolvers = {
       const projects: any = await getProjects.byUser(context.currentUser)
       return projects ? projects : []
     }),
-
     projectById: authenticated(async (_: void, arg: any, context: any): Promise<Project[]> => {
       const projectId: number = arg.ID;
       const getProjects = new GetProjects
@@ -28,6 +28,11 @@ export const ProjectResolver: IResolvers = {
       const data: any = await newProject.create();
 
       return data
+    }),
+    updateProject: authenticated(async (_: void, arg: any, context: any): Promise<Project> => {
+      const projectInput = arg.ProjectInput;
+      const id = arg.ID;
+      return await updateProject(projectInput, id, context.currentUser)
     })
   }
 }

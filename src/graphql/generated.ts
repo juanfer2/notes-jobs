@@ -32,6 +32,7 @@ export type Mutation = {
   createQueryScript?: Maybe<QueryScript>;
   healt?: Maybe<MessageResponse>;
   register?: Maybe<User>;
+  updateProject?: Maybe<Project>;
   updateQueryScript?: Maybe<QueryScript>;
 };
 
@@ -48,6 +49,12 @@ export type MutationCreateQueryScriptArgs = {
 
 export type MutationRegisterArgs = {
   userInput?: Maybe<UserInput>;
+};
+
+
+export type MutationUpdateProjectArgs = {
+  ID: Scalars['ID'];
+  ProjectInput?: Maybe<ProjectInput>;
 };
 
 
@@ -283,6 +290,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createQueryScript?: Resolver<Maybe<ResolversTypes['QueryScript']>, ParentType, ContextType, RequireFields<MutationCreateQueryScriptArgs, never>>;
   healt?: Resolver<Maybe<ResolversTypes['MessageResponse']>, ParentType, ContextType>;
   register?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationRegisterArgs, never>>;
+  updateProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationUpdateProjectArgs, 'ID'>>;
   updateQueryScript?: Resolver<Maybe<ResolversTypes['QueryScript']>, ParentType, ContextType, RequireFields<MutationUpdateQueryScriptArgs, 'ID'>>;
 };
 

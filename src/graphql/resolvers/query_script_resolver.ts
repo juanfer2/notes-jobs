@@ -12,24 +12,17 @@ export const QueryScriptResolver: IResolvers = {
   },
   Mutation: {
     updateQueryScript: authenticated(async (_: void, arg: any, context: any): Promise<any> => {
-      const queryInput = arg;
+      const queryInput = arg.QueryScriptUpdateInput;
+      const projectId = arg.ID;
+      const updateProject = await updateProjectAndQueries(projectId, queryInput)
 
-      console.log(arg)
-      await updateProjectAndQueries(arg.ID, arg.QueryScriptUpdateInput)
-      return {
-        description: 'text',
-        id: "1",
-        title: "text"
-      }
+      return updateProject
     }),
 
     createQueryScript: authenticated(async (_: void, arg: any, context: any): Promise<any> => {
       const queryInput: QueryInput = arg.QueryScript;
-      console.log('data', queryInput)
-
       const newQuery = new QueryModel(queryInput);
       const data: any = await newQuery.create();
-      console.log("data", data);
 
       return data
     })
